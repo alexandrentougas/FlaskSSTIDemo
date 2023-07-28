@@ -49,3 +49,18 @@ Let's type something using the syntax of Jinja and  which can be executed as cod
 The output ends up being this:
 
 ![Output2](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Output2.PNG)
+
+## Safe way of rendering
+Let's instead use a result.html page for the rendering of the output. Our page will contain a simple body like that:
+
+    <body>
+	    <h1>{{ name }}</h1>
+    </body>
+
+And our in our index route we're gonna use our html file instead of redirecting to the result route (which is now useless and can be removed):
+
+    #return  redirect(url_for('result', name=name)) 
+    return render_template('result.html', name=name)
+
+If we try to send the same product of numbers, the new output will be:
+![Output3](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Output3.PNG)
