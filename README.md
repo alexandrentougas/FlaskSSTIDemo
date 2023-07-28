@@ -8,11 +8,13 @@ A server-side template injection occurs when an attacker is able to use native t
 
 Here's a simple form in our index.html page:
 
-    <form  id="form"  method="post"  action=""> 
-	    <label  for="name">Name</label>
-	    <input  type="text"  name="name"  id="name"  value=""  required>
-	    <button  type="submit">Send</button>
-    </form>
+``` html
+ <form  id="form"  method="post"  action=""> 
+	<label  for="name">Name</label>
+	<input  type="text"  name="name"  id="name"  value=""  required>
+	<button  type="submit">Send</button>
+</form>
+```
     
 ![Form](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Form.PNG)
 
@@ -22,20 +24,22 @@ And the data entered is then output like this:
 
 Let's look at how our form and result are rendered:
 
-    @app.route('/', methods=('GET', 'POST'))
-    def  index():
- 
-	    if  request.method == 'POST':
-		    name = request.form["name"]
-		    return  redirect(url_for('result', name=name))
-	    else:
-		    return  render_template('index.html')
-		    	    
-    @app.route('/result')  
-    def  result():
-	    return  render_template_string(
-		    "<h1>"+ request.args.get('name') + "</h1>"
-		)
+``` python
+@app.route('/', methods=('GET', 'POST'))
+def  index():
+
+	if  request.method == 'POST':
+		name = request.form["name"]
+		return  redirect(url_for('result', name=name))
+	else:
+		return  render_template('index.html')
+  	    
+@app.route('/result')  
+def  result():
+	return  render_template_string(
+		"<h1>"+ request.args.get('name') + "</h1>"
+	)
+```
 
 When the form is submitted, a redirection is made to the **/result URL** by passing it the data entered as the variable **name**.  As we saw in a previous screenshot the URL generated then contains the variable. 
 
@@ -53,14 +57,18 @@ The output ends up being this:
 ## Safe way of rendering
 Let's instead use a result.html page for the rendering of the output. Our page will contain a simple body like that:
 
-    <body>
-	    <h1>{{ name }}</h1>
+``` html
+	<body>
+		<h1>{{ name }}</h1>
     </body>
+```
 
 And our in our index route we're gonna use our html file instead of redirecting to the result route (which is now useless and can be removed):
 
-    #return  redirect(url_for('result', name=name)) 
-    return render_template('result.html', name=name)
+``` python
+	#return  redirect(url_for('result', name=name)) 
+	return render_template('result.html', name=name)
+```
 
 If we try to send the same product of numbers, the new output will be:
 ![Output3](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Output3.PNG)
