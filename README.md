@@ -17,6 +17,7 @@ Here's a simple form in our index.html page:
 ![Form](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Form.PNG)
 
 And the data entered is then output like this:
+
 ![Output](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Output.PNG)
 
 Let's look at how our form and result are rendered:
@@ -42,7 +43,9 @@ It is then fetched with **request.args.get()** and displayed in a HTML **h1** he
 
 ## Vulnerability example
 Let's type something using the syntax of Jinja and  which can be executed as code/logic. The product of 2 numbers for example:
+
 ![Form2](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Form2.PNG)
 
 The output ends up being this:
+
 ![Output2](https://github.com/alexandrentougas/FlaskSSTIDemo/blob/main/assets/Output2.PNG)
