@@ -11,8 +11,8 @@ Here's a simple form in our index.html page:
 ``` html
 <form  id="form"  method="post"  action=""> 
     <label  for="name">Name</label>
-	<input  type="text"  name="name"  id="name"  value=""  required>
-	<button  type="submit">Send</button>
+    <input  type="text"  name="name"  id="name"  value="" required>
+    <button  type="submit">Send</button>
 </form>
 ```
     
